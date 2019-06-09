@@ -2,6 +2,7 @@ package com.software.Dao;
 
 import com.software.Domain.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
