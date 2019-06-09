@@ -21,6 +21,31 @@ public class User {
     @Column(name = "age")
     private int age;
 
+    @Column
+    private String name;
+
+    @Column
+    private String sex; //男 女
+
+    @Column(name = "userphone")
+    private  String userphone;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public Integer getUserid() {
         return userid;
     }
@@ -68,8 +93,5 @@ public class User {
     public void setUserphone(String userphone) {
         this.userphone = userphone;
     }
-
-    @Column(name = "userphone")
-    private  String userphone;
 
 }

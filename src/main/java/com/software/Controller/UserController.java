@@ -12,33 +12,43 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /*
-    注册时判断是否有相同用户名
-     */
-    @GetMapping(value = "/SameUsername/{name}")
-    public Boolean userList(@PathVariable("name")String name){
-        User user= userService.findUserByName(name);
-        if(user==null)return false;
-        return true;
-    }
+//    /*
+//    注册时判断是否有相同用户名
+//     */
+//    @GetMapping(value = "/SameUsername/{name}")
+//    public Boolean userList(@PathVariable("name")String name){
+//        User user= userService.findUserByName(name);
+//        if(user==null)return false;
+//        return true;
+//    }
+
+
 
     /*
     注册
      */
 
-    @RequestMapping(value = "/UserRegister")
-    public User Xyregister(@RequestBody User user) {
+    @RequestMapping(value = "/UserRegister") //0 用户名存在 //1 成功
+    public Integer Xyregister(@RequestBody User user) {
         System.out.println(user.getUsername());
-        user.setUserid(0);
-        return userService.userRegister(user);
+        User user1 = userService.findUserByName(user.getUsername());
+        if(user1 == null)
+        {
+            userService.userRegister(user);
+            return 1;
+        }
+        else
+        return 0;
     }
 
     /*
     登录,返回值为0是用户名不存在，-1为密码错误
      */
     @RequestMapping(value = "/UserLogin")
-    public int userLogin( @RequestParam(value = "name",required = false) String username,
+    public int[] userLogin( @RequestParam(value = "username",required = false) String username,
                           @RequestParam(value = "password",required = false) String password){
+
+        System.out.println(username + " " + password);
         return userService.userLogin(username,password);
     }
 
@@ -56,6 +66,7 @@ public class UserController {
     /*
     修改用户信息
      */
+
     @RequestMapping(value = "/updateUserInfo")
     public User updateUser(@PathVariable("id") Integer id,
                            @RequestParam("username") String username,
@@ -86,6 +97,7 @@ public class UserController {
      */
     @GetMapping(value = "/UserById/{id}")
     @ResponseBody
+    //Todo  用户信息(名字，性别，类型:顾客1，公司2，年龄，邮箱，电话) 用户id token
     public User findUserByid(@PathVariable("id")int id){
         User user= userService.findUserById(id);
         return user;

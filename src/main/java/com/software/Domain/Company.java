@@ -3,25 +3,47 @@ package com.software.Domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="aircompany")
-public class Aircompany {
+@Table(name="company")
+public class Company {
     @Id
     @Column(name = "companyid",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer companyid;
 
-    @Column(name="companyname")
+    @Column
     private String companyname;
 
+    @Column(name = "companyusername")
+    private String companyusername;
 
-    @Column(name = "companymail")
+    @Column(name = "companypassword")
+    private String companypassword;
+
+    @Column
     private String companymail;
 
-    @Column(name = "companyphone")
+    @Column
     private String companyphone;
 
-    @Column(name = "address")
+    @Column
     private  String address;
+
+    public String getCompanyusername() {
+        return companyusername;
+    }
+
+    public void setCompanyusername(String companyusername) {
+        this.companyusername = companyusername;
+    }
+
+    public String getCompanypassword() {
+        return companypassword;
+    }
+
+    public void setCompanypassword(String companypassword) {
+        this.companypassword = companypassword;
+    }
+
 
     public Integer getCompanyid() {
         return companyid;

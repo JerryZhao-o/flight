@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface FlightRepositury extends JpaRepository<Flight,Integer> {
+public interface FlightRepository extends JpaRepository<Flight,Integer> {
     List<Flight> findALLBySourceAndDestination(String source, String destination);
 }

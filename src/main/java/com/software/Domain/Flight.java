@@ -22,7 +22,7 @@ public class Flight {
 
     @ManyToOne
     @JoinColumn(name = "companyid")
-    private Aircompany aircompany;
+    private Company company;
 
     public Integer getFlightid() {
         return flightid;
@@ -56,11 +56,11 @@ public class Flight {
         this.departurtime = departurtime;
     }
 
-    public Aircompany getAircompany() {
-        return aircompany;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setAircompany(Aircompany aircompany) {
-        this.aircompany = aircompany;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
