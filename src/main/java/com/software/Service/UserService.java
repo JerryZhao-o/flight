@@ -68,6 +68,7 @@ public class UserService {
         }
         else
         {
+            a[0] = 1;
             user = userRepository.findByUsernameAndPassword(name, password);
             if (user == null) a[1] = -1;//密码错误
             else a[1]=user.getUserid();
