@@ -41,14 +41,14 @@ public class UserService {
     public User findUserById(int id){return userRepository.findByUserid(id);}
 
     //登录
-    public int userLogin(String name, String pwd) {
+    public int userLogin(String name, String password) {
         int flag = 0;
         User user;
-        System.out.println(name+"  "+pwd);
+        System.out.println(name+"  "+ password);
         user = findUserByName(name);
         if (user == null) flag = 0;//用户名不存在
         else {
-            user = userRepository.findByUsernameAndPwd(name, pwd);
+            user = userRepository.findByUsernameAndPassword(name, password);
             if (user == null) flag = -1;//密码错误
             else flag=user.getUserid();
         }

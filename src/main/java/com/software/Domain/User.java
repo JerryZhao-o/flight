@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -16,50 +15,17 @@ public class User {
     @Column(name="username")
     private String username;
     @Column(name = "password")
-    private String pwd;
+    private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "phone")
-    private  String phone;
-    @Column(name = "sex")
-    private  String sex;
     @Column(name = "age")
     private int age;
-    @Column(name = "address")
-    private  String address;
-    @Column(name = "hospital")
-    private  String hospital;
 
-/*
-   @ManyToMany(cascade = CascadeType.ALL)
-   @JoinTable(name = "train",joinColumns = {
-           @JoinColumn(name = "userid",referencedColumnName = "userid")},inverseJoinColumns = {
-            @JoinColumn(name = "trainpicid",referencedColumnName = "trainpicid")
-   })
-   private List<UserTrainpic> userTrainpicList;*/
-
-    public User(){
-
-    }
-
-    public User(Integer id,String username,String pwd,String email,String phone,
-                String sex,String address,String hospital,int age){
-        this.userid=id;
-        this.username=username;
-        this.pwd=pwd;
-        this.email=email;
-        this.phone=phone;
-        this.sex=sex;
-        this.address=address;
-        this.hospital=hospital;
-        this.age=age;
-    }
-
-    public int getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(Integer userid) {
         this.userid = userid;
     }
 
@@ -71,12 +37,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -87,22 +53,6 @@ public class User {
         this.email = email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
     public int getAge() {
         return age;
     }
@@ -111,20 +61,15 @@ public class User {
         this.age = age;
     }
 
-    public String getAddress() {
-        return address;
+    public String getUserphone() {
+        return userphone;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
     }
 
-    public void setHospital(String hospital) {
-        this.hospital = hospital;
-    }
-
-    public String getHospital() {
-        return hospital;
-    }
+    @Column(name = "userphone")
+    private  String userphone;
 
 }

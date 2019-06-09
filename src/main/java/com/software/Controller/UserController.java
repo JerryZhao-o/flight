@@ -36,10 +36,10 @@ public class UserController {
     /*
     登录,返回值为0是用户名不存在，-1为密码错误
      */
-    @RequestMapping(value = "/UserLogin", method = RequestMethod.POST)
-    public int userLogin( @RequestParam(value = "username",required = false) String username,
+    @RequestMapping(value = "/UserLogin")
+    public int userLogin( @RequestParam(value = "name",required = false) String username,
                           @RequestParam(value = "password",required = false) String password){
-        return 20000;
+        return userService.userLogin(username,password);
     }
 
     /*
@@ -59,24 +59,16 @@ public class UserController {
     @RequestMapping(value = "/updateUserInfo")
     public User updateUser(@PathVariable("id") Integer id,
                            @RequestParam("username") String username,
-                           @RequestParam("pwd") String password,
+                           @RequestParam("password") String password,
                            @RequestParam("email") String email,
-                           @RequestParam("phone") String phone,
-                           @RequestParam(value = "sex",required = false) String sex,
-                           @RequestParam(value = "address",required = false) String address,
-                           @RequestParam(value = "hospital",required = false) String hospital,
-                           @RequestParam("age")Integer age
+                           @RequestParam("userphone") String userphone
     ){
         User user=new User();
         user.setUserid(id);
         user.setUsername(username);
-        user.setPwd(password);
+        user.setPassword(password);
         user.setEmail(email);
-        user.setPhone(phone);
-        user.setAddress(address);
-        user.setSex(sex);
-        user.setHospital(hospital);
-        user.setAge(age);
+        user.setUserphone(userphone);
         return userService.userUpdate(user);
     }
 
@@ -94,7 +86,7 @@ public class UserController {
      */
     @GetMapping(value = "/UserById/{id}")
     @ResponseBody
-    public User findUserByname(@PathVariable("id")int id){
+    public User findUserByid(@PathVariable("id")int id){
         User user= userService.findUserById(id);
         return user;
     }
