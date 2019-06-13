@@ -1,6 +1,7 @@
 package com.software.Domain;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -8,8 +9,7 @@ import java.util.Date;
 public class Flight {
     @Id
     @Column(name = "flightid",nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer flightid;
+    private String flightid;
 
     @Column(name="source")
     private String source;
@@ -17,18 +17,24 @@ public class Flight {
     @Column(name = "destination")
     private String destination;
 
-    @Column(name = "departurtime")
-    private Date departurtime;
+    @Column(name = "departuretime")
+    private String departuretime;
+
+    @Column
+    private String landingtime;
+
+    @Column
+    private java.sql.Date departuredate;
 
     @ManyToOne
     @JoinColumn(name = "companyid")
     private Company company;
 
-    public Integer getFlightid() {
+    public String getFlightid() {
         return flightid;
     }
 
-    public void setFlightid(Integer flightid) {
+    public void setFlightid(String flightid) {
         this.flightid = flightid;
     }
 
@@ -48,12 +54,12 @@ public class Flight {
         this.destination = destination;
     }
 
-    public Date getDeparturtime() {
-        return departurtime;
+    public String getDeparturetime() {
+        return departuretime;
     }
 
-    public void setDeparturtime(Date departurtime) {
-        this.departurtime = departurtime;
+    public void setDeparturetime(String departurtime) {
+        this.departuretime = departurtime;
     }
 
     public Company getCompany() {
@@ -62,5 +68,21 @@ public class Flight {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public String getLandingtime() {
+        return landingtime;
+    }
+
+    public void setLandingtime(String landingtime) {
+        this.landingtime = landingtime;
+    }
+
+    public java.sql.Date getDeparturedate() {
+        return departuredate;
+    }
+
+    public void setDeparturedate(java.sql.Date departuredate) {
+        this.departuredate = departuredate;
     }
 }

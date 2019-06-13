@@ -14,6 +14,7 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private CompanyRepository companyRepository;
 
     //注册
@@ -43,6 +44,7 @@ public class UserService {
     public User findUserById(int id){return userRepository.findByUserid(id);}
 
     //登录
+
     public int[] userLogin(String name, String password) {
         int flag = 0;
         int[] a = new int[2];
@@ -50,10 +52,10 @@ public class UserService {
         a[1] = 0;
         User user;
         Company company;
-        System.out.println(name+"  "+ password);
         user = findUserByName(name);
         if (user == null)
         {
+            System.out.println(name);
             company = companyRepository.findByCompanyusername(name);
             if(company == null) a[1] = 0; //用户名在两个表中都不存在不存在
             else
@@ -61,7 +63,7 @@ public class UserService {
                 a[0] = 2;
                 company = companyRepository.findByCompanyusernameAndCompanypassword(name, password);
                 if(company == null)
-                    a[1] = -1;
+                    a[1] = -1;//密码错误
                 else
                     a[1] = company.getCompanyid();
             }
