@@ -10,8 +10,7 @@ import java.util.Set;
 public class Passenger implements Serializable {
 
     @Id
-    @OneToOne
-    private Seat seatid;
+    private Integer seatid;
 
     @Column(name = "name")
     private String name;

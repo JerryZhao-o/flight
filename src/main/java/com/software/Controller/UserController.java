@@ -23,9 +23,11 @@ public class UserController {
                               @RequestParam(value = "mail",required = false) String mail,
                               @RequestParam(value = "phone",required = false) String phone,
                               @RequestParam(value = "age",required = false) String age,
-                              @RequestParam(value = "sex",required = false) String sex)
+                              @RequestParam(value = "sex",required = false) String sex,
+                              @RequestParam(value = "username", required = true) String username)
     {
         User user = new User();
+        user.setUsername(username);
         user.setName(name);
         user.setPassword(code);
         user.setEmail(mail);

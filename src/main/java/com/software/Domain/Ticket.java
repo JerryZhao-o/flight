@@ -3,7 +3,6 @@ package com.software.Domain;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
 public class Ticket {
 
     String flightid;

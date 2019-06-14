@@ -48,8 +48,7 @@ public class OrderController {
             List<Seat> seatList1 = seatRepository.findSeatByFlightidAndSeatlevel(i.getFlightid(), "头等舱");
             List<Seat> seatList2 = seatRepository.findSeatByFlightidAndSeatlevel(i.getFlightid(), "普通舱");
             List<Seat> seatList3 = seatRepository.findSeatByFlightidAndSeatlevel(i.getFlightid(), "经济舱");
-            Company company = i.getCompany();
-            String companyname = companyRepository.findByCompanyid(i.getCompany().getCompanyid()).getCompanyname();
+            String companyname = i.getCompany().getCompanyname();
             Ticket ticket1 = new Ticket(i.getFlightid(), companyname, "头等舱", seatList1.size());
             Ticket ticket2 = new Ticket(i.getFlightid(), companyname, "头等舱", seatList2.size());
             Ticket ticket3 = new Ticket(i.getFlightid(), companyname, "头等舱", seatList3.size());
