@@ -1,9 +1,7 @@
 package com.software.Controller;
 
-import com.software.Dao.FlightRepository;
-import com.software.Dao.SeatRepository;
-import com.software.Domain.Flight;
-import com.software.Domain.Seat;
+import com.software.Dao.*;
+import com.software.Domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +20,16 @@ public class OrderController {
     private FlightRepository flightRepository;
     @Autowired
     SeatRepository seatRepository;
+    @Autowired
+    CompanyRepository companyRepository;
+    @Autowired
+    OrderRepository orderRepository;
+    @Autowired
+    PassengerReposity passengerReposity;
+
 
     @RequestMapping(value = "/search")
-    public List<Flight> search(
+    public List<Ticket> search(
             @RequestParam("source") String source,
             @RequestParam("destination") String destination,
             @RequestParam("departuredate") String departuredate){
@@ -32,7 +37,7 @@ public class OrderController {
         System.out.println(source+destination+departuredate);
 
         // findSeatByFlightid
-        Map<Flight, Integer[]> ticketnumber = new HashMap<>();
+        List<Ticket> ticketList = new ArrayList<>();
         List<Flight> flightList = flightRepository.findBySourceAndDestinationAndDeparturedate(source, destination, departuredate);
         for(Flight i : flightList)
         {
@@ -40,16 +45,19 @@ public class OrderController {
 //            seatList = seatRepository.findSeatByFlightid(i.getFlightid());
 
             System.out.println(i.getFlightid());
-            Integer[] seatnumber = new Integer[3];
             List<Seat> seatList1 = seatRepository.findSeatByFlightidAndSeatlevel(i.getFlightid(), "头等舱");
             List<Seat> seatList2 = seatRepository.findSeatByFlightidAndSeatlevel(i.getFlightid(), "普通舱");
             List<Seat> seatList3 = seatRepository.findSeatByFlightidAndSeatlevel(i.getFlightid(), "经济舱");
-            seatnumber[0] = seatList1.size();
-            seatnumber[1] = seatList2.size();
-            seatnumber[2] = seatList3.size();
-            ticketnumber.put(i, seatnumber);
+            Company company = i.getCompany();
+            String companyname = companyRepository.findByCompanyid(i.getCompany().getCompanyid()).getCompanyname();
+            Ticket ticket1 = new Ticket(i.getFlightid(), companyname, "头等舱", seatList1.size());
+            Ticket ticket2 = new Ticket(i.getFlightid(), companyname, "头等舱", seatList2.size());
+            Ticket ticket3 = new Ticket(i.getFlightid(), companyname, "头等舱", seatList3.size());
+            ticketList.add(ticket1);
+            ticketList.add(ticket2);
+            ticketList.add(ticket3);
         }
-        return flightList;
+        return ticketList;
     }
 
     @RequestMapping(value = "/order")
@@ -64,9 +72,17 @@ public class OrderController {
     }
 
     @RequestMapping(value = "queryorder")
-    public void queryordre(@RequestParam("userid") Integer userid)
+    public List<QueryOrder> queryordre(@RequestParam("userid") Integer userid)
     {
-
+        List<QueryOrder> queryOrderList= new ArrayList<>();
+        List<Order> orderList = orderRepository.findAllByUserid(userid);
+        for(Order i : orderList)
+        {
+            List<Passenger> passengerList = passengerReposity.findAllByOrderid(i.getOrderid());
+            QueryOrder queryOrder = new QueryOrder(i, passengerList);
+            queryOrderList.add(queryOrder);
+        }
+        return queryOrderList;
     }
 
 

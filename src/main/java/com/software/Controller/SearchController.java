@@ -30,7 +30,6 @@ public class SearchController {
             @RequestParam("companyid") Integer companyid) throws ParseException {
 
 
-        System.out.println(source+destination+departuredate+companyid);
         String timePattern = "yyyy-MM-dd";
             // 将Date转换成指定形式的时间字符串
             SimpleDateFormat sdf = new SimpleDateFormat(timePattern);

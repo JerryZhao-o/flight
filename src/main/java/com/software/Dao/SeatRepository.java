@@ -31,7 +31,7 @@ public interface SeatRepository extends JpaRepository<Seat,Integer>{
     List<Seat> findSeat3ByCompanyid(Integer companyid);
 
 
-    @Query(nativeQuery =true,value = "select * from seat where flightid =:flightid and seatlevel =:seatlevel")
+    @Query(nativeQuery =true,value = "select * from seat where flightid =:flightid and seatlevel =:seatlevel and isempty = 'true'")
     List<Seat> findSeatByFlightidAndSeatlevel(String flightid, String seatlevel);
 
 

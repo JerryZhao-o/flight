@@ -32,7 +32,6 @@ public class UserController {
         user.setUserphone(phone);
         user.setAge(Integer.parseInt(age));
         user.setSex(sex);
-        System.out.println(user.getUsername());
         User user1 = userService.findUserByName(user.getUsername());
         if(user1 == null)
         {
